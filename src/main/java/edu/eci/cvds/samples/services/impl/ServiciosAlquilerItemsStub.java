@@ -35,11 +35,11 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
        itemsrentados = new HashMap<>();
        tipositems = new HashMap<>();
        mapaPrestamosPorIdCliente=new HashMap<>();
-       //poblar();
+       poblar();
    }
 
    @Override
-   public int valorMultaRetrasoxDia(int itemId) {
+   public long valorMultaRetrasoxDia(int itemId) {
        return MULTA_DIARIA;
    }
 
@@ -48,8 +48,10 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
        Cliente c=null;
        if(clientes.containsKey(docu)){
            c=clientes.get(docu);
-       }
-       return c;
+		   return c;
+       }else {
+            throw new ExcepcionServiciosAlquiler("El cliente con documento: " + docu + " no existe");
+        }
    }
 
    @Override
@@ -67,12 +69,14 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
    }
 
    @Override
-   public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
+   public void vetar(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
        if(clientes.containsKey(docu)){
            Cliente c=clientes.get(docu);
            c.setVetado(estado);            
        }
-       else{throw new ExcepcionServiciosAlquiler("Cliente no registrado:"+docu);}
+       else{
+		   throw new ExcepcionServiciosAlquiler("Cliente no registrado:"+docu);
+	   }
    }
 
    @Override
@@ -102,7 +106,7 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
    }
 
    @Override
-   public void actualizarTarifaItem(int id, long tarifa) throws ExcepcionServiciosAlquiler {
+   public void tarifaItem(int id, long tarifa) throws ExcepcionServiciosAlquiler {
        if (!itemsDisponibles.containsKey(id)) {
            Item c = itemsDisponibles.get(id);
            c.setTarifaxDia(tarifa);

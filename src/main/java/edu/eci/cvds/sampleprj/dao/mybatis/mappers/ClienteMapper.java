@@ -12,25 +12,29 @@ import edu.eci.cvds.samples.entities.Cliente;
  */
 public interface ClienteMapper {
 	
-	public Cliente consultarCliente(@Param("id") int id);
+	public Cliente consultarCliente(@Param("idCli") long id);
+	
+	public List<Cliente> consultarClientes();
     
     /**
      * Registrar un nuevo item rentado asociado al cliente identificado
      * con 'idc' y relacionado con el item identificado con 'idi'
-     * @param id
-     * @param idit
-     * @param fechainicio
-     * @param fechafin 
+     * @param idCli
+     * @param idIt
+     * @param fechaInicial
+     * @param fechaFinal 
      */
-    public void agregarItemRentadoACliente(@Param("id") int id, 
-            @Param("idit") int idit, 
-            @Param("fechainicio") Date fechainicio,
-            @Param("fechafin") Date fechafin);
+    public void agregarItemRentadoACliente(@Param("idCli") long id, 
+            @Param("idIt") int idit, 
+            @Param("fechaI") Date fechaInicial,
+            @Param("fechaF") Date fechaFinal);
 
     /**
      * Consultar todos los clientes
      * @return 
      */
-    public List<Cliente> consultarClientes();
-    
+
+    public void agregarCliente(@Param("cliente") Cliente cliente);
+	
+	public void vetar(@Param("cliente") long idCl, @Param("vetado") int vetar);
 }
