@@ -4,8 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper">
+    <select id="getTipoItem" parameterType="map" resultMap="TipoItemResult" >
+        SELECT id , descripcion FROM VI_TIPOITEM
+        <if test="id != null">
+            WHERE id= #{id}
+        </if>
+        ;
+    </select>
+	
+    <insert id="addTipoItem" parameterType="map">
+        INSERT INTO VI_TIPOITEM (id,descripcion) values(#{tipo.id},#{tipo.descripcion})
+    </insert>
+	
     <resultMap type='TipoItem' id='TipoItemResult'>
         <id property='id' column='id'/>
         <result property='descripcion' column='descripcion'/>
-    </resultMap>
+    </resultMap>            
 </mapper>

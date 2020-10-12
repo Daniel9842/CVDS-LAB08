@@ -17,18 +17,43 @@
 			ti.id ,
 			ti.descripcion 
 		FROM VI_ITEMS AS i JOIN VI_TIPOITEM AS ti ON i.TIPOITEM_id=ti.id WHERE i.id = #{id}  
+		<if test="idit != null">
+            where i.id = #{idit}
+        </if>
 	</select>
+	
+	 <select id="consultarDisponibles" parameterType="map" resultMap="ItemResult">
+        SELECT
+        DISTINCT (i.id)  ,
+        i.nombre,
+        i.descripcion,
+        i.fechalanzamiento,
+        i.tarifaxdia,
+        i.formatorenta,
+        i.genero,
+        ti.id,
+        ti.descripcion
+
+        FROM VI_ITEMS as i LEFT JOIN VI_ITEMRENTADO as ir on i.id=ir.ITEMS_id LEFT JOIN VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+    </select>
+	
 	<insert parameterType="map" id="insertarItem">
 		INSERT INTO VI_ITEMS VALUES (#{it.id},#{it.nombre},#{it.descripcion},#{it.fechaLanzamiento},#{it.tarifaxDia},#{it.formatoRenta},#{it.genero},#{it.tipo.id})    
 	</insert>
+	
+	<update id="actualizarTarifaItem" parameterType="map">
+        update VI_ITEMS set tarifaxdia=#{tarifa} where id=#{id}
+    </update>
+	
     <resultMap type='Item' id='ItemResult'>
         <id property='id' column='id'/>
-		<result property='nombre' column='nombre'/>
+        <result property='nombre' column='nombre'/>
         <result property='descripcion' column='descripcion'/>
-        <result property='fechaLanzamiento' column='fechaLanzamiento'/>
-        <result property='tarifaxDia' column='tarifaxDia'/>
-        <result property='formatoRenta' column='formatoRenta'/>
+        <result property='fechaLanzamiento' column='fechalanzamiento'/>
+        <result property='tarifaxDia' column='tarifaxdia'/>
+        <result property='formatoRenta' column='formatorenta'/>
         <result property='genero' column='genero'/>
-        <association property="tipo" javaType="TipoItem" resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper.TipoItemResult' columnPrefix = 'ti_'></association>
-    </resultMap>    
+        <association property="tipo" javaType="TipoItem" columnPrefix="ti_" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper.TipoItemResult" ></association>
+    </resultMap>
+	
 </mapper>

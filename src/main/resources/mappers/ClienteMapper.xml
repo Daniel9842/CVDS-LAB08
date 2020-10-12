@@ -52,9 +52,18 @@
 			ti.descripcion
 		FROM VI_CLIENTES AS c LEFT JOIN VI_ITEMRENTADO AS ir ON c.documento=ir.CLIENTES_documento LEFT JOIN VI_ITEMS AS i ON ir.ITEMS_id=i.id LEFT JOIN VI_TIPOITEM AS ti ON i.TIPOITEM_id=ti.id WHERE c.documento = #{id}
 	</select>
-	<insert parameterType="map" id="agregarItemRentadoACliente">
-        INSERT INTO VI_ITEMRENTADO(CLIENTES_documento,ITEMS_id,fechainiciorenta,fechafinrenta) VALUES (#{id},#{idit},#{fechainicio},#{fechafin})     
+	
+	<insert id="agregarItemRentadoACliente" parameterType="map" >
+		insert into VI_ITEMRENTADO(CLIENTES_documento,ITEMS_id,fechainiciorenta, fechafinrenta) values (#{idcl},#{idit},#{Fechai},#{Fechaf});
 	</insert>
+	<update id="vetarCliente" parameterType="map">
+		update VI_CLIENTES set vetado=#{estado} where documento=#{cliente};
+	</update>
+	<insert id="insertarCliente" parameterType="map">
+		insert into VI_CLIENTES(documento,nombre,telefono,direccion,email,vetado)
+		values (#{cliente.documento},#{cliente.nombre},#{cliente.telefono},#{cliente.direccion},#{cliente.email},#{cliente.vetado});
+	</insert>
+	
 	<resultMap type='Cliente' id='ClienteResult'>
 		<id property='documento' column='documento'/>
 		<result property='nombre' column='nombre'/>
