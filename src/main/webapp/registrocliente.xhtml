@@ -10,7 +10,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	
-<h:head> 
+<h:head>
 
 	<title> Servicios cliente </title>	
 
@@ -48,24 +48,24 @@
         </p:dataTable>
 		
         <h:panelGrid id="grid" cellpadding="5" columns="2" style="margin-bottom:12px">
-            <p:outputLabel for="Documento" style="color:red;font-size:200%" value="Documento: " />
+            <p:outputLabel for="Documento" style="cont-size:100%" value="Documento: " />
             <p:inputText id="Documento" type="long" binding="#{doc}" />
 			
-            <p:outputLabel for="Nombre" style="color:red;font-size:190%" value="Nombre: "/>
+            <p:outputLabel for="Nombre" style="font-size:100%" value="Nombre: "/>
             <p:inputText id="Nombre" type="String" binding="#{name}"/>
 
-            <p:outputLabel for="Direccion" style="color:red;font-size:200%" value="Direccion: "/>
+            <p:outputLabel for="Direccion" style="font-size:100%" value="Direccion: "/>
             <p:inputText id="Direccion" type="String" binding="#{dir}"/>
 
-            <p:outputLabel for="Telefono" style="color:red;font-size:200%" value="Telefono: " />
+            <p:outputLabel for="Telefono" style="font-size:100%" value="Telefono: " />
             <p:inputText id="Telefono" type="String" binding="#{tele}"/>
 
-            <p:outputLabel for="Email" style="color:red;font-size:200%" value="Email: " />
+            <p:outputLabel for="Email" style="font-size:100%" value="Email: " />
             <p:inputText id="Email" type="String" binding="#{mail}"/>
 
         </h:panelGrid>
 		<div class="divButton">
-			<p:commandButton update="Client_Form" class="Button" actionListener="#{AlquilerItemsBean.registrarCliente(doc.value,name.value,tele.value,dir.value,mail.value)}" value="Registrar Cliente"/>
+			<p:commandButton update="Cliente" class="Button" actionListener="#{AlquilerItemsBean.registrarCliente(doc.value,name.value,tele.value,dir.value,mail.value)}" value="Registrar Cliente"/>
 		</div>
     </h:form>
 </h:body>

@@ -16,7 +16,7 @@
  </h:head>
 
 <h:body>
-    <h:form id="Alquiler_Form">    
+    <h:form id="Alquiler">    
         <p:dataTable var="itrent" value="#{AlquilerItemsBean.getSelectedCliente().rentados}" paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} 
 		{CurrentPageReport} {NextPageLink} {LastPageLink}" rows="10">
 			<f:facet name="primero">
@@ -44,7 +44,7 @@
 
            <p:outputLabel value="Costo: "/> 
 		   <p:outputLabel value="#{AlquilerItemsBean.costo}"/>
-		   <p:commandButton class="Button" value="Consular costo" action="#{AlquilerItemsBean.consultarCosto(itid.value,dias.value)}" update="Alquiler_Form"/>
+		   <p:commandButton class="Button" value="Consular costo" action="#{AlquilerItemsBean.consultarCosto(itid.value,dias.value)}" update="Alquiler"/>
         
 			<p:commandButton class="Button" value="Alquilar" action="registrocliente?faces-redirect = true" >
 				<f:actionListener binding="#{AlquilerItemsBean.registrarAlquilerCliente(itid.value,dias.value)}"/>
