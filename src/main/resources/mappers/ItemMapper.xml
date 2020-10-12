@@ -6,35 +6,37 @@
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper">
    <select parameterType = "map" id = "consultarItem" resultMap = "ItemResult">
 		SELECT
-			i.id ,
-			i.nombre ,
-			i.descripcion ,
-			i.fechalanzamiento ,
+			i.id,
+			i.nombre,
+			i.descripcion,
+			i.fechalanzamiento,
 			i.tarifaxdia ,
-			i.formatorenta ,
+			i.formatorenta,
 			i.genero,
-
+			
 			ti.id ,
 			ti.descripcion 
+
 		FROM VI_ITEMS AS i JOIN VI_TIPOITEM AS ti ON i.TIPOITEM_id=ti.id WHERE i.id = #{id}  
 		<if test="idit != null">
-            where i.id = #{idit}
+            WHERE i.id = #{idit}
         </if>
 	</select>
 	
 	 <select id="consultarDisponibles" parameterType="map" resultMap="ItemResult">
         SELECT
-        DISTINCT (i.id)  ,
-        i.nombre,
-        i.descripcion,
-        i.fechalanzamiento,
-        i.tarifaxdia,
-        i.formatorenta,
-        i.genero,
-        ti.id,
-        ti.descripcion
+			DISTINCT (i.id),
+			i.nombre,
+			i.descripcion,
+			i.fechalanzamiento,
+			i.tarifaxdia,
+			i.formatorenta,
+			i.genero,
+			
+			ti.id,
+			ti.descripcion
 
-        FROM VI_ITEMS as i LEFT JOIN VI_ITEMRENTADO as ir on i.id=ir.ITEMS_id LEFT JOIN VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+        FROM VI_ITEMS AS i LEFT JOIN VI_ITEMRENTADO AS ir ON i.id=ir.ITEMS_id LEFT JOIN VI_TIPOITEM AS ti ON i.TIPOITEM_id = ti.id
     </select>
 	
 	<insert parameterType="map" id="insertarItem">
@@ -42,7 +44,7 @@
 	</insert>
 	
 	<update id="actualizarTarifaItem" parameterType="map">
-        update VI_ITEMS set tarifaxdia=#{tarifa} where id=#{id}
+        UPDATE VI_ITEMS SET tarifaxdia=#{tarifa} where id=#{id}
     </update>
 	
     <resultMap type='Item' id='ItemResult'>

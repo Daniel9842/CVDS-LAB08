@@ -7,7 +7,7 @@
     <select id="getTipoItem" parameterType="map" resultMap="TipoItemResult" >
         SELECT id , descripcion FROM VI_TIPOITEM
         <if test="id != null">
-            WHERE id= #{id}
+            WHERE id = #{id}
         </if>
         ;
     </select>
